@@ -63,3 +63,37 @@ The lab successfully demonstrates:
 ## Conclusion
 
 The two-server environment provides a practical demonstration of foundational Linux security and network administration skills.
+
+## Security Testing Summary
+
+The following security configurations were successfully verified during this lab:
+
+### 1. SSH Authentication
+- Successfully connected from the Mac administrator workstation to the Jump Server.
+- Successfully connected from the Jump Server to the Internal Server.
+- Verified SSH public-key authentication.
+
+### 2. UFW Firewall
+- Confirmed UFW is active on both Ubuntu servers.
+- Verified incoming traffic is denied by default.
+- Verified outgoing traffic is allowed by default.
+- Confirmed SSH access is permitted.
+
+### 3. Fail2ban Protection
+- Confirmed the SSHD jail is enabled on both servers.
+- Maximum failed attempts: 5.
+- Find time: 600 seconds (10 minutes).
+- Ban time: 1800 seconds (30 minutes).
+
+### 4. Network Connectivity
+- Verified SSH connectivity between the Mac and Jump Server.
+- Verified SSH connectivity between the Jump Server and Internal Server.
+- Confirmed the Internal Server is reachable through the Jump Server.
+
+### Testing Limitations
+- Deliberate failed-login and account-lockout testing has not been performed.
+- No formal penetration test has been conducted.
+
+## Conclusion
+
+This lab demonstrates practical Linux server administration and foundational cybersecurity skills, including SSH hardening, firewall configuration, brute-force protection, and secure remote administration.
