@@ -6,7 +6,7 @@ This document describes the virtual environment used for the Linux Secure Jump S
 
 ## Hardware and Software
 
-- Host computer: MacBook pro
+- Host computer: MacBook Air
 - Host operating system: macOS
 - Virtualization software: Oracle VirtualBox
 - Server operating system: Ubuntu Server
