@@ -52,3 +52,14 @@ Additional documentation, network diagrams, and security testing evidence will b
 ---
 
 **Disclaimer:** This project is an educational cybersecurity home lab. No production systems were used.
+
+## Screenshots
+
+### Network Topology
+![Network Topology](network-topology.png)
+
+### Jump Server Security
+![Jump Server Security](jump-server-security.png)
+
+### Internal Server Security
+![Internal Server Security](internal-server-security.png)
