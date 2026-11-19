@@ -84,3 +84,34 @@ Additional documentation, network diagrams, and security testing evidence will b
 - VirtualBox
 - macOS
 - GitHub
+
+- ## Network Architecture
+
+This lab uses a two-server architecture to demonstrate controlled remote administration and internal network protection.
+
+### Administrator Workstation
+The MacBook Air serves as the administrator workstation and connects to the Jump Server through SSH.
+
+### Jump Server
+The Ubuntu Jump Server acts as a secure gateway between the administrator workstation and the internal server.
+
+Security controls:
+- SSH remote administration
+- UFW firewall
+- Fail2ban SSH protection
+- Public-key authentication
+
+### Internal Server
+The Ubuntu Internal Server hosts protected resources and is accessed through the Jump Server.
+
+Security controls:
+- SSH remote administration
+- UFW firewall
+- Fail2ban SSH protection
+- Public-key authentication
+
+### Access Flow
+
+MacBook Pro → Jump Server → Internal Server
+
+The architecture demonstrates the principle of using a controlled gateway to access an internal system rather than connecting directly from the administrator workstation.
