@@ -85,7 +85,7 @@ Additional documentation, network diagrams, and security testing evidence will b
 - macOS
 - GitHub
 
-- ## Network Architecture
+## Network Architecture
 
 This lab uses a two-server architecture to demonstrate controlled remote administration and internal network protection.
 
@@ -112,6 +112,6 @@ Security controls:
 
 ### Access Flow
 
-MacBook Pro → Jump Server → Internal Server
+MacBook Air → Jump Server → Internal Server
 
 The architecture demonstrates the principle of using a controlled gateway to access an internal system rather than connecting directly from the administrator workstation.
