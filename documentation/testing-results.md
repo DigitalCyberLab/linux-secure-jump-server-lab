@@ -2,156 +2,131 @@
 
 ## Overview
 
-This document records the verification performed on the Ubuntu Jump Server and Internal Server.
+This document records the security testing and configuration verification performed on the Ubuntu Jump Server and Internal Server.
 
-## 1. SSH Authentication
+The purpose of this testing was to verify SSH authentication, firewall configurations, Fail2ban protection, and secure network connectivity.
 
-**Result: Successful**
-
-- Verified SSH connectivity from macOS to the Jump Server.
-- Verified SSH connectivity from the Jump Server to the Internal Server.
-- Confirmed successful public-key authentication.
-
-## 2. UFW Firewall
+## 1. SSH Authentication Verification
 
 **Result: Successful**
 
-Both servers reported that UFW was active.
+The following SSH connections were successfully verified:
 
-Verified firewall policies:
+- Connected from the MacBook Air administrator workstation to the Jump Server.
+- Connected from the Jump Server to the Internal Server.
+- Confirmed successful SSH public-key authentication on both connections.
+- Confirmed the Internal Server received SSH connections from the Jump Server IP address `192.168.50.10`.
 
-- Incoming connections: Denied by default.
-- Outgoing connections: Allowed by default.
-- SSH port 22: Allowed.
-- Logging: Enabled.
+Both SSH private keys are protected with passphrases.
 
-## 3. Fail2ban
+## 2. UFW Firewall Verification
 
 **Result: Successful**
 
-Fail2ban was installed and running on both servers.
+UFW was confirmed active on both Ubuntu servers.
 
-Verified SSH jail settings:
+### Jump Server
+
+- Firewall status: Active.
+- Default incoming policy: Deny.
+- Default outgoing policy: Allow.
+- SSH port 22: Allowed for IPv4 and IPv6.
+- Firewall logging: Enabled.
+
+### Internal Server
+
+- Firewall status: Active.
+- Default incoming policy: Deny.
+- Default outgoing policy: Allow.
+- SSH port 22: Allowed only from `192.168.50.10`.
+- Firewall logging: Enabled.
+
+The Internal Server firewall restricts SSH access to the Jump Server, helping enforce the intended network access architecture.
+
+## 3. Fail2ban Verification
+
+**Result: Configuration Verified**
+
+Fail2ban was confirmed installed and running on both Ubuntu servers.
+
+The SSHD jail was enabled on both systems.
 
 | Configuration | Jump Server | Internal Server |
 |---|---:|---:|
-| Maximum attempts | 5 | 5 |
-| Detection window | 600 seconds | 600 seconds |
-| Ban duration | 1800 seconds | 1800 seconds |
-| SSH jail | Enabled | Enabled |
+| SSHD jail | Enabled | Enabled |
+| Maximum failed attempts | 5 | 5 |
+| Detection window | 600 seconds (10 minutes) | 600 seconds (10 minutes) |
+| Ban duration | 1800 seconds (30 minutes) | 1800 seconds (30 minutes) |
 
-## 4. Verification Commands
+Fail2ban status checks showed zero failed attempts and zero banned IP addresses at the time of verification.
+
+## 4. Network Connectivity Verification
+
+**Result: Successful**
+
+- Verified SSH connectivity from the MacBook Air to the Jump Server.
+- Verified SSH connectivity from the Jump Server to the Internal Server.
+- Confirmed the Internal Server was reachable through the Jump Server.
+- Verified that the Internal Server SSH firewall rule permits connections from the Jump Server IP address.
+
+This confirms the intended administrator access path:
+
+**MacBook Air → Jump Server → Internal Server**
+
+## 5. Verification Commands
+
+The following commands were used to verify the security configurations.
+
+### Fail2ban Verification
 
 ```bash
 sudo systemctl status fail2ban
 sudo fail2ban-client status
 sudo fail2ban-client status sshd
+```
+
+### Fail2ban Configuration Checks
+
+```bash
+sudo fail2ban-client get sshd maxretry
+sudo fail2ban-client get sshd findtime
+sudo fail2ban-client get sshd bantime
+```
+
+### UFW Firewall Verification
+
+```bash
 sudo ufw status verbose
 ```
 
-## 5. Final Assessment
+These commands were executed on the respective Ubuntu servers.
+
+## 6. Testing Limitations
+
+The following tests have not yet been performed:
+
+- Deliberate failed-login testing.
+- Verification of an actual Fail2ban IP ban.
+- Formal penetration testing.
+
+Fail2ban installation, service status, jail activation, and configuration values were verified. However, actual blocking behavior has not yet been tested through simulated failed login attempts.
+
+## 7. Final Assessment
+
+The security verification confirmed that both Ubuntu servers have active UFW firewalls and configured Fail2ban SSH protection.
 
 The lab successfully demonstrates:
 
-- SSH key-based authentication.
-- Firewall protection using UFW.
-- SSH intrusion monitoring using Fail2ban.
-- Secure administration across two Ubuntu servers.
-
-**Note:** Active configuration checks were performed. Deliberate failed-login testing and penetration testing have not yet been performed.
-
-## Conclusion
-
-The two-server environment provides a practical demonstration of foundational Linux security and network administration skills.
-
-## Security Testing Summary
-
-The following security configurations were successfully verified during this lab:
-
-### 1. SSH Authentication
-- Successfully connected from the Mac administrator workstation to the Jump Server.
-- Successfully connected from the Jump Server to the Internal Server.
-- Verified SSH public-key authentication.
-
-### 2. UFW Firewall
-- Confirmed UFW is active on both Ubuntu servers.
-- Verified incoming traffic is denied by default.
-- Verified outgoing traffic is allowed by default.
-- Confirmed SSH access is permitted.
-
-### 3. Fail2ban Protection
-- Confirmed the SSHD jail is enabled on both servers.
-- Maximum failed attempts: 5.
-- Find time: 600 seconds (10 minutes).
-- Ban time: 1800 seconds (30 minutes).
-
-### 4. Network Connectivity
-- Verified SSH connectivity between the Mac and Jump Server.
-- Verified SSH connectivity between the Jump Server and Internal Server.
-- Confirmed the Internal Server is reachable through the Jump Server.
-
-### Testing Limitations
-- Deliberate failed-login and account-lockout testing has not been performed.
-- No formal penetration test has been conducted.
+- Linux server administration.
+- SSH public-key authentication.
+- Secure remote administration.
+- UFW firewall configuration.
+- Network access restrictions.
+- Fail2ban installation and configuration.
+- Security configuration verification.
 
 ## Conclusion
 
-This lab demonstrates practical Linux server administration and foundational cybersecurity skills, including SSH hardening, firewall configuration, brute-force protection, and secure remote administration.
+This cybersecurity home lab demonstrates foundational Linux security and network administration practices through a two-server environment.
 
-## Additional Security Verification — November 19, 2026
-
-Additional testing was performed to verify SSH connectivity, firewall configurations, and Fail2ban protection on both Ubuntu servers.
-
-### 1. SSH Connectivity Verification
-
-**MacBook Air → Jump Server**
-- Successfully connected using SSH public-key authentication.
-- Verified access to the Jump Server.
-- Private SSH key protected by a passphrase.
-
-**Jump Server → Internal Server**
-- Successfully connected using SSH public-key authentication.
-- Verified access to the Internal Server.
-- Confirmed the Internal Server received the connection from `192.168.50.10`.
-
-### 2. Jump Server Firewall Verification
-
-- UFW status: Active.
-- Default incoming policy: Deny.
-- Default outgoing policy: Allow.
-- SSH port 22 permitted for IPv4 and IPv6.
-- Firewall logging enabled.
-
-### 3. Internal Server Firewall Verification
-
-- UFW status: Active.
-- Default incoming policy: Deny.
-- Default outgoing policy: Allow.
-- SSH port 22 permitted only from `192.168.50.10`.
-- Firewall logging enabled.
-
-### 4. Fail2ban Verification
-
-Both servers successfully passed configuration checks.
-
-| Configuration | Jump Server | Internal Server |
-|---|---:|---:|
-| SSH jail | Enabled | Enabled |
-| Maximum retries | 5 | 5 |
-| Find time | 600 seconds | 600 seconds |
-| Ban time | 1800 seconds | 1800 seconds |
-
-### 5. Testing Results
-
-- SSH connectivity verified successfully.
-- UFW firewall configurations verified.
-- Fail2ban SSH protection verified.
-- Internal Server SSH access restricted to the Jump Server.
-
-### Testing Limitations
-
-Deliberate failed-login testing and actual IP banning have not been performed. These results verify configuration and connectivity, not successful blocking of a simulated brute-force attack.
-
-## Verification Conclusion
-
-Both Ubuntu servers passed the additional security configuration checks. The lab demonstrates controlled SSH administration, firewall access restrictions, and Fail2ban-based SSH protection.
+The Jump Server provides the administrative entry point to the Internal Server, while SSH authentication, firewall restrictions, and Fail2ban provide additional layers of security.
