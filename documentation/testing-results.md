@@ -97,3 +97,61 @@ The following security configurations were successfully verified during this lab
 ## Conclusion
 
 This lab demonstrates practical Linux server administration and foundational cybersecurity skills, including SSH hardening, firewall configuration, brute-force protection, and secure remote administration.
+
+## Additional Security Verification — November 19, 2026
+
+Additional testing was performed to verify SSH connectivity, firewall configurations, and Fail2ban protection on both Ubuntu servers.
+
+### 1. SSH Connectivity Verification
+
+**MacBook Air → Jump Server**
+- Successfully connected using SSH public-key authentication.
+- Verified access to the Jump Server.
+- Private SSH key protected by a passphrase.
+
+**Jump Server → Internal Server**
+- Successfully connected using SSH public-key authentication.
+- Verified access to the Internal Server.
+- Confirmed the Internal Server received the connection from `192.168.50.10`.
+
+### 2. Jump Server Firewall Verification
+
+- UFW status: Active.
+- Default incoming policy: Deny.
+- Default outgoing policy: Allow.
+- SSH port 22 permitted for IPv4 and IPv6.
+- Firewall logging enabled.
+
+### 3. Internal Server Firewall Verification
+
+- UFW status: Active.
+- Default incoming policy: Deny.
+- Default outgoing policy: Allow.
+- SSH port 22 permitted only from `192.168.50.10`.
+- Firewall logging enabled.
+
+### 4. Fail2ban Verification
+
+Both servers successfully passed configuration checks.
+
+| Configuration | Jump Server | Internal Server |
+|---|---:|---:|
+| SSH jail | Enabled | Enabled |
+| Maximum retries | 5 | 5 |
+| Find time | 600 seconds | 600 seconds |
+| Ban time | 1800 seconds | 1800 seconds |
+
+### 5. Testing Results
+
+- SSH connectivity verified successfully.
+- UFW firewall configurations verified.
+- Fail2ban SSH protection verified.
+- Internal Server SSH access restricted to the Jump Server.
+
+### Testing Limitations
+
+Deliberate failed-login testing and actual IP banning have not been performed. These results verify configuration and connectivity, not successful blocking of a simulated brute-force attack.
+
+## Verification Conclusion
+
+Both Ubuntu servers passed the additional security configuration checks. The lab demonstrates controlled SSH administration, firewall access restrictions, and Fail2ban-based SSH protection.
