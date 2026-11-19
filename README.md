@@ -90,7 +90,7 @@ Additional documentation, network diagrams, and security testing evidence will b
 This lab uses a two-server architecture to demonstrate controlled remote administration and internal network protection.
 
 ### Administrator Workstation
-The MacBook Pro serves as the administrator workstation and connects to the Jump Server through SSH.
+The MacBook Air serves as the administrator workstation and connects to the Jump Server through SSH.
 
 ### Jump Server
 The Ubuntu Jump Server acts as a secure gateway between the administrator workstation and the internal server.
