@@ -63,3 +63,24 @@ Additional documentation, network diagrams, and security testing evidence will b
 
 ### Internal Server Security
 ![Internal Server Security](internal-server-security.png)
+
+## Technical Skills Demonstrated
+
+- **Linux Administration:** Ubuntu Server installation, configuration, and management.
+- **SSH Security:** SSH key generation, public-key authentication, and secure remote access.
+- **Firewall Management:** UFW configuration and firewall rule verification.
+- **Intrusion Prevention:** Fail2ban installation, configuration, and SSH brute-force protection.
+- **Network Security:** Jump server architecture and controlled access to an internal server.
+- **Security Verification:** Reviewing firewall status, SSH authentication, and Fail2ban settings.
+- **Documentation:** Technical documentation, network topology diagrams, and security configuration records.
+
+## Technologies Used
+
+- Ubuntu Server
+- Linux
+- OpenSSH
+- UFW
+- Fail2ban
+- VirtualBox
+- macOS
+- GitHub
