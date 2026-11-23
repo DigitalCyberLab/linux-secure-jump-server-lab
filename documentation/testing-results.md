@@ -38,7 +38,7 @@ UFW was confirmed active on both Ubuntu servers.
 - Firewall status: Active.
 - Default incoming policy: Deny.
 - Default outgoing policy: Allow.
-- SSH port 22: Allowed only from `192.168.50.10`.
+- SSH port 22: Allowed only from `xxx.xxx.xx.xx`.
 - Firewall logging: Enabled.
 
 The Internal Server firewall restricts SSH access to the Jump Server, helping enforce the intended network access architecture.
