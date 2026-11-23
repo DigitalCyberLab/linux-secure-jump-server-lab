@@ -15,7 +15,7 @@ The following SSH connections were successfully verified:
 - Connected from the MacBook Air administrator workstation to the Jump Server.
 - Connected from the Jump Server to the Internal Server.
 - Confirmed successful SSH public-key authentication on both connections.
-- Confirmed the Internal Server received SSH connections from the Jump Server IP address `192.168.50.10`.
+- Confirmed the Internal Server received SSH connections from the Jump Server IP address `xxx.xxx.xx.xx`.
 
 Both SSH private keys are protected with passphrases.
 
