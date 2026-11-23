@@ -23,7 +23,7 @@ This document describes the virtual environment used for the Linux Secure Jump S
 
 - Hostname: internal
 - Username: josh
-- IP address: 192.168.50.20
+- IP address: xxx.xxx.xx.xx
 - Role: Protected internal server
 
 ## Network Access
